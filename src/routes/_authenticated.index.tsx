@@ -119,13 +119,22 @@ function TodayPage() {
 
   return (
     <div className="px-4 py-6">
-      <header className="mb-6">
-        <h1 className="font-display text-2xl font-bold text-foreground">
-          {todayEntry ? "Today's entry" : "How was your day?"}
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          {formatDate(new Date(), "EEEE, MMMM d, yyyy")}
-        </p>
+      <header className="mb-6 flex items-start justify-between gap-3">
+        <div>
+          <h1 className="font-display text-2xl font-bold text-foreground">
+            {todayEntry ? "Today's entry" : "How was your day?"}
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            {formatDate(new Date(), "EEEE, MMMM d, yyyy")}
+          </p>
+        </div>
+        <Link
+          to="/settings"
+          aria-label="Settings"
+          className="rounded-full p-2 text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <Settings className="h-5 w-5" />
+        </Link>
       </header>
 
       {todayEntry && (
