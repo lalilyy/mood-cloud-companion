@@ -12,16 +12,22 @@ function Callback() {
   useEffect(() => {
   async function finishLogin() {
     const code = new URL(window.location.href).searchParams.get("code");
+    console.log("Code:", code);
 
     if (!code) {
+      console.log("No code found");
       navigate({ to: "/login", replace: true });
       return;
     }
 
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const result = await supabase.auth.exchangeCodeForSession(code);
+    console.log("Exchange result:", result);
 
-    if (error) {
-      console.error("Exchange error:", error);
+    const session = await supabase.auth.getSession();
+    console.log("Session:", session);
+
+    if (result.error) {
+      console.error(result.error);
       navigate({ to: "/login", replace: true });
       return;
     }
