@@ -8,6 +8,7 @@ interface MoodPickerProps {
 }
 
 export function MoodPicker({ value, onChange }: MoodPickerProps) {
+  const { moods: MOODS } = useMoodIcons();
   return (
     <div className="grid grid-cols-5 gap-2">
       {MOODS.map((mood) => {
