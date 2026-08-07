@@ -5,7 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Calendar } from "@/components/ui/calendar";
 import { getEntries } from "@/lib/mood-entries.functions";
-import { MOODS, WEATHER_TYPES } from "@/lib/mood-data";
+import { WEATHER_TYPES } from "@/lib/mood-data";
+import { useMoodIcons } from "@/hooks/use-mood-icons";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { CalendarDays } from "lucide-react";
 
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/_authenticated/calendar")({
 });
 
 function CalendarPage() {
+  const { moods: MOODS } = useMoodIcons();
   const [month, setMonth] = useState<Date>(new Date());
   const monthStart = format(startOfMonth(month), "yyyy-MM-dd");
   const monthEnd = format(endOfMonth(month), "yyyy-MM-dd");

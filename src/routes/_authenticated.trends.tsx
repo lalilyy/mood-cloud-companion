@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { getEntries } from "@/lib/mood-entries.functions";
-import { MOODS } from "@/lib/mood-data";
+import { useMoodIcons } from "@/hooks/use-mood-icons";
 import { TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/trends")({
@@ -22,6 +22,7 @@ export const Route = createFileRoute("/_authenticated/trends")({
 });
 
 function TrendsPage() {
+  const { moods: MOODS } = useMoodIcons();
   const today = new Date();
   const start = format(subDays(today, 29), "yyyy-MM-dd");
   const end = format(today, "yyyy-MM-dd");
