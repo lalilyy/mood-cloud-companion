@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+#import { lovable } from "@/integrations/lovable";
 import type { Session, User } from "@supabase/supabase-js";
 
 export function useAuth() {
@@ -41,12 +41,14 @@ export function useAuth() {
     return { error };
   };
 
-  const signInWithGoogle = async () => {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    return result;
-  };
+const signInWithGoogle = async () => {
+  return await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${window.location.origin}`,
+    },
+  });
+};
 
   const signOut = async () => {
     await supabase.auth.signOut();
