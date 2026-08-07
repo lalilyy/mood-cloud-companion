@@ -9,7 +9,8 @@ import { format as formatDate } from "date-fns";
 import { getEntries, createEntry, updateEntry, deleteEntry } from "@/lib/mood-entries.functions";
 import { EntryForm } from "@/components/entry-form";
 import { Button } from "@/components/ui/button";
-import { MOODS, WEATHER_TYPES } from "@/lib/mood-data";
+import { WEATHER_TYPES } from "@/lib/mood-data";
+import { useMoodIcons } from "@/hooks/use-mood-icons";
 import type { MoodValue, WeatherValue } from "@/lib/mood-data";
 import { Pencil, Trash2, Sparkles } from "lucide-react";
 
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/_authenticated/")({
 });
 
 function TodayPage() {
+  const { moods: MOODS } = useMoodIcons();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const today = formatDate(new Date(), "yyyy-MM-dd");

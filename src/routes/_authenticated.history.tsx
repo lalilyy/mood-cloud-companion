@@ -4,7 +4,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { getEntries, deleteEntry } from "@/lib/mood-entries.functions";
-import { MOODS, WEATHER_TYPES } from "@/lib/mood-data";
+import { WEATHER_TYPES } from "@/lib/mood-data";
+import { useMoodIcons } from "@/hooks/use-mood-icons";
 import { List, Pencil, Trash2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/_authenticated/history")({
 });
 
 function HistoryPage() {
+  const { moods: MOODS } = useMoodIcons();
   const queryClient = useQueryClient();
   const getEntriesFn = useServerFn(getEntries);
   const deleteEntryFn = useServerFn(deleteEntry);
