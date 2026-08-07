@@ -16,10 +16,10 @@ import { Pencil, Trash2, Sparkles } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
-      { title: "Today — MoodSky" },
-      { name: "description", content: "Log today's mood and weather in MoodSky." },
-      { property: "og:title", content: "Today — MoodSky" },
-      { property: "og:description", content: "Log today's mood and weather in MoodSky." },
+      { title: "Today — LilyMood" },
+      { name: "description", content: "Log today's mood and weather in LilyMood." },
+      { property: "og:title", content: "Today — LilyMood" },
+      { property: "og:description", content: "Log today's mood and weather in LilyMood." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

@@ -10,10 +10,10 @@ import { TrendingUp } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/trends")({
   head: () => ({
     meta: [
-      { title: "Trends — MoodSky" },
-      { name: "description", content: "See your mood trends over time in MoodSky." },
-      { property: "og:title", content: "Trends — MoodSky" },
-      { property: "og:description", content: "See your mood trends over time in MoodSky." },
+      { title: "Trends — LilyMood" },
+      { name: "description", content: "See your mood trends over time in LilyMood." },
+      { property: "og:title", content: "Trends — LilyMood" },
+      { property: "og:description", content: "See your mood trends over time in LilyMood." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
