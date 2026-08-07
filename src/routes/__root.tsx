@@ -78,14 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1" },
-      { title: "LilyMood — Track your mood and weather" },
+      { title: "MoodSky — Track your mood and weather" },
       { name: "description", content: "A gentle mood and weather tracker that helps you spot patterns in how you feel." },
-      { name: "author", content: "LilyMood" },
-      { property: "og:title", content: "LilyMood — Track your mood and weather" },
+      { name: "author", content: "MoodSky" },
+      { property: "og:title", content: "MoodSky — Track your mood and weather" },
       { property: "og:description", content: "A gentle mood and weather tracker that helps you spot patterns in how you feel." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@LilyMood" },
+      { name: "twitter:site", content: "@MoodSky" },
     ],
     links: [
       {

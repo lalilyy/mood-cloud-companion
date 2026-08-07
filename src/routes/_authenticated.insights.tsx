@@ -2,16 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getInsights } from "@/lib/mood-entries.functions";
-import { WEATHER_TYPES } from "@/lib/mood-data";
-import { useMoodIcons } from "@/hooks/use-mood-icons";
+import { MOODS, WEATHER_TYPES } from "@/lib/mood-data";
 import { Lightbulb, TrendingUp, Calendar, Cloud } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/insights")({
   head: () => ({
     meta: [
-      { title: "Insights — LilyMood" },
+      { title: "Insights — MoodSky" },
       { name: "description", content: "Discover patterns between your mood and the weather." },
-      { property: "og:title", content: "Insights — LilyMood" },
+      { property: "og:title", content: "Insights — MoodSky" },
       { property: "og:description", content: "Discover patterns between your mood and the weather." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -21,7 +20,6 @@ export const Route = createFileRoute("/_authenticated/insights")({
 });
 
 function InsightsPage() {
-  const { moods: MOODS } = useMoodIcons();
   const getInsightsFn = useServerFn(getInsights);
 
   const { data: insights } = useQuery({

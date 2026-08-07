@@ -9,10 +9,10 @@ import { Cloud, Sun } from "lucide-react";
 export const Route = createFileRoute("/signup")({
   head: () => ({
     meta: [
-      { title: "Sign up — LilyMood" },
-      { name: "description", content: "Create a LilyMood account and start tracking your mood and weather." },
-      { property: "og:title", content: "Sign up — LilyMood" },
-      { property: "og:description", content: "Create a LilyMood account and start tracking your mood and weather." },
+      { title: "Sign up — MoodSky" },
+      { name: "description", content: "Create a MoodSky account and start tracking your mood and weather." },
+      { property: "og:title", content: "Sign up — MoodSky" },
+      { property: "og:description", content: "Create a MoodSky account and start tracking your mood and weather." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -78,7 +78,7 @@ function SignupPage() {
           </div>
         </div>
         <h1 className="text-center text-2xl font-bold tracking-tight text-foreground">
-          Create your LilyMood account
+          Create your MoodSky account
         </h1>
         <p className="mt-2 text-center text-sm text-muted-foreground">
           Start understanding how weather and mood connect.

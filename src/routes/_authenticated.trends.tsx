@@ -4,16 +4,16 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { getEntries } from "@/lib/mood-entries.functions";
-import { useMoodIcons } from "@/hooks/use-mood-icons";
+import { MOODS } from "@/lib/mood-data";
 import { TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/trends")({
   head: () => ({
     meta: [
-      { title: "Trends — LilyMood" },
-      { name: "description", content: "See your mood trends over time in LilyMood." },
-      { property: "og:title", content: "Trends — LilyMood" },
-      { property: "og:description", content: "See your mood trends over time in LilyMood." },
+      { title: "Trends — MoodSky" },
+      { name: "description", content: "See your mood trends over time in MoodSky." },
+      { property: "og:title", content: "Trends — MoodSky" },
+      { property: "og:description", content: "See your mood trends over time in MoodSky." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -22,7 +22,6 @@ export const Route = createFileRoute("/_authenticated/trends")({
 });
 
 function TrendsPage() {
-  const { moods: MOODS } = useMoodIcons();
   const today = new Date();
   const start = format(subDays(today, 29), "yyyy-MM-dd");
   const end = format(today, "yyyy-MM-dd");

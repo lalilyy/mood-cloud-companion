@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { format, startOfMonth, endOfMonth } from "date-fns";
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
@@ -9,18 +9,17 @@ import { format as formatDate } from "date-fns";
 import { getEntries, createEntry, updateEntry, deleteEntry } from "@/lib/mood-entries.functions";
 import { EntryForm } from "@/components/entry-form";
 import { Button } from "@/components/ui/button";
-import { WEATHER_TYPES } from "@/lib/mood-data";
-import { useMoodIcons } from "@/hooks/use-mood-icons";
+import { MOODS, WEATHER_TYPES } from "@/lib/mood-data";
 import type { MoodValue, WeatherValue } from "@/lib/mood-data";
-import { Pencil, Trash2, Sparkles, Settings } from "lucide-react";
+import { Pencil, Trash2, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
-      { title: "Today — LilyMood" },
-      { name: "description", content: "Log today's mood and weather in LilyMood." },
-      { property: "og:title", content: "Today — LilyMood" },
-      { property: "og:description", content: "Log today's mood and weather in LilyMood." },
+      { title: "Today — MoodSky" },
+      { name: "description", content: "Log today's mood and weather in MoodSky." },
+      { property: "og:title", content: "Today — MoodSky" },
+      { property: "og:description", content: "Log today's mood and weather in MoodSky." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -29,7 +28,6 @@ export const Route = createFileRoute("/_authenticated/")({
 });
 
 function TodayPage() {
-  const { moods: MOODS } = useMoodIcons();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const today = formatDate(new Date(), "yyyy-MM-dd");
@@ -119,22 +117,13 @@ function TodayPage() {
 
   return (
     <div className="px-4 py-6">
-      <header className="mb-6 flex items-start justify-between gap-3">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">
-            {todayEntry ? "Today's entry" : "How was your day?"}
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            {formatDate(new Date(), "EEEE, MMMM d, yyyy")}
-          </p>
-        </div>
-        <Link
-          to="/settings"
-          aria-label="Settings"
-          className="rounded-full p-2 text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <Settings className="h-5 w-5" />
-        </Link>
+      <header className="mb-6">
+        <h1 className="font-display text-2xl font-bold text-foreground">
+          {todayEntry ? "Today's entry" : "How was your day?"}
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          {formatDate(new Date(), "EEEE, MMMM d, yyyy")}
+        </p>
       </header>
 
       {todayEntry && (

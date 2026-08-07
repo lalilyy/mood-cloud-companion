@@ -9,10 +9,10 @@ import { Cloud, Sun } from "lucide-react";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Sign in — LilyMood" },
-      { name: "description", content: "Sign in to LilyMood to track your mood and weather." },
-      { property: "og:title", content: "Sign in — LilyMood" },
-      { property: "og:description", content: "Sign in to LilyMood to track your mood and weather." },
+      { title: "Sign in — MoodSky" },
+      { name: "description", content: "Sign in to MoodSky to track your mood and weather." },
+      { property: "og:title", content: "Sign in — MoodSky" },
+      { property: "og:description", content: "Sign in to MoodSky to track your mood and weather." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -74,7 +74,7 @@ function LoginPage() {
           </div>
         </div>
         <h1 className="text-center text-2xl font-bold tracking-tight text-foreground">
-          Welcome back to LilyMood
+          Welcome back to MoodSky
         </h1>
         <p className="mt-2 text-center text-sm text-muted-foreground">
           Track your mood and the weather each day.
