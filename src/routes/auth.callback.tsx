@@ -10,22 +10,27 @@ function Callback() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function finishLogin() {
-      const url = window.location.href;
+  async function finishLogin() {
+    const code = new URL(window.location.href).searchParams.get("code");
 
-      const { error } = await supabase.auth.exchangeCodeForSession(url);
-
-      if (error) {
-        console.error(error);
-        navigate({ to: "/login", replace: true });
-        return;
-      }
-
-      navigate({ to: "/", replace: true });
+    if (!code) {
+      navigate({ to: "/login", replace: true });
+      return;
     }
 
-    finishLogin();
-  }, [navigate]);
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+    if (error) {
+      console.error("Exchange error:", error);
+      navigate({ to: "/login", replace: true });
+      return;
+    }
+
+    navigate({ to: "/", replace: true });
+  }
+
+  finishLogin();
+}, [navigate]);
 
   return (
     <div className="flex min-h-screen items-center justify-center">
