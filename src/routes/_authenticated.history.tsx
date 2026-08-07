@@ -11,9 +11,9 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/_authenticated/history")({
   head: () => ({
     meta: [
-      { title: "History — MoodSky" },
+      { title: "History — LilyMood" },
       { name: "description", content: "Browse and edit your past mood and weather entries." },
-      { property: "og:title", content: "History — MoodSky" },
+      { property: "og:title", content: "History — LilyMood" },
       { property: "og:description", content: "Browse and edit your past mood and weather entries." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

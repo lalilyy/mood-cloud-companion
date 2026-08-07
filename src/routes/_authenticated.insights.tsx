@@ -8,9 +8,9 @@ import { Lightbulb, TrendingUp, Calendar, Cloud } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/insights")({
   head: () => ({
     meta: [
-      { title: "Insights — MoodSky" },
+      { title: "Insights — LilyMood" },
       { name: "description", content: "Discover patterns between your mood and the weather." },
-      { property: "og:title", content: "Insights — MoodSky" },
+      { property: "og:title", content: "Insights — LilyMood" },
       { property: "og:description", content: "Discover patterns between your mood and the weather." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

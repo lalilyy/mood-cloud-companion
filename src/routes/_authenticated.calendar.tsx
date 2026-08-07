@@ -12,9 +12,9 @@ import { CalendarDays } from "lucide-react";
 export const Route = createFileRoute("/_authenticated/calendar")({
   head: () => ({
     meta: [
-      { title: "Calendar — MoodSky" },
+      { title: "Calendar — LilyMood" },
       { name: "description", content: "View your mood and weather entries on a calendar." },
-      { property: "og:title", content: "Calendar — MoodSky" },
+      { property: "og:title", content: "Calendar — LilyMood" },
       { property: "og:description", content: "View your mood and weather entries on a calendar." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
