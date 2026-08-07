@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { WEATHER_TYPES } from "@/lib/mood-data";
 import { useMoodIcons } from "@/hooks/use-mood-icons";
 import type { MoodValue, WeatherValue } from "@/lib/mood-data";
-import { Pencil, Trash2, Sparkles } from "lucide-react";
+import { Pencil, Trash2, Sparkles, Settings } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
