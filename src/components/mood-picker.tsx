@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { MOODS } from "@/lib/mood-data";
+import { useMoodIcons } from "@/hooks/use-mood-icons";
 import type { MoodValue } from "@/lib/mood-data";
 
 interface MoodPickerProps {
