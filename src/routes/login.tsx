@@ -30,6 +30,16 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  // Surface OAuth failures that come back as URL params instead of bouncing silently.
+  useEffect(() => {
+    const urlError = readAuthErrorFromUrl();
+    if (urlError) {
+      setError(urlError);
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading && user) {
@@ -44,17 +54,20 @@ function LoginPage() {
     const { error } = await signIn(email, password);
     setIsSubmitting(false);
     if (error) {
-      setError(error.message);
+      setError(friendlyAuthError(error.message));
     }
   };
 
   const handleGoogle = async () => {
     setError(null);
-    const result = await signInWithGoogle();
-    if (result?.error) {
-      setError(result.error.message);
+    setIsGoogleLoading(true);
+    const { error } = await signInWithGoogle("/");
+    if (error) {
+      setIsGoogleLoading(false);
+      setError(friendlyAuthError(error.message));
     }
   };
+
 
   if (isLoading || user) {
     return (
