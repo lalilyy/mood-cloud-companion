@@ -156,10 +156,12 @@ function SignupPage() {
           type="button"
           variant="outline"
           onClick={handleGoogle}
+          disabled={isGoogleLoading}
           className="mt-6 w-full rounded-full border-border py-5 text-base"
         >
-          Continue with Google
+          {isGoogleLoading ? "Redirecting to Google…" : "Continue with Google"}
         </Button>
+
 
         <p className="mt-8 text-center text-sm text-muted-foreground">
           Already have an account?{" "}
