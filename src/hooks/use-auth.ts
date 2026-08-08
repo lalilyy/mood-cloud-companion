@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+import { logAuthError, storePostAuthRedirect } from "@/lib/auth-errors";
 import type { Session, User } from "@supabase/supabase-js";
 
 export function useAuth() {
@@ -33,23 +33,40 @@ export function useAuth() {
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) logAuthError("signInWithPassword", error);
     return { error };
   };
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+    });
+    if (error) logAuthError("signUp", error);
     return { error };
   };
 
-  const signInWithGoogle = async () => {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+  /**
+   * Standard Supabase Google OAuth so the session is created against whichever
+   * Supabase project this app is configured with (Lovable Cloud or your own).
+   */
+  const signInWithGoogle = async (redirectTo?: string) => {
+    if (redirectTo) storePostAuthRedirect(redirectTo);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: { prompt: "select_account" },
+      },
     });
-    return result;
+    if (error) logAuthError("signInWithOAuth(google)", error);
+    return { error };
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) logAuthError("signOut", error);
   };
 
   return { user, session, isLoading, signIn, signUp, signInWithGoogle, signOut };
