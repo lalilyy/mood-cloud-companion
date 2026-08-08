@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/use-auth";
+import { friendlyAuthError, readAuthErrorFromUrl } from "@/lib/auth-errors";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Cloud, Sun } from "lucide-react";
+
 
 export const Route = createFileRoute("/signup")({
   head: () => ({
@@ -29,6 +31,15 @@ function SignupPage() {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  useEffect(() => {
+    const urlError = readAuthErrorFromUrl();
+    if (urlError) {
+      setError(urlError);
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading && user) {
@@ -44,7 +55,7 @@ function SignupPage() {
     const { error } = await signUp(email, password);
     setIsSubmitting(false);
     if (error) {
-      setError(error.message);
+      setError(friendlyAuthError(error.message));
     } else {
       setMessage("Check your email for a confirmation link.");
     }
@@ -52,11 +63,14 @@ function SignupPage() {
 
   const handleGoogle = async () => {
     setError(null);
-    const result = await signInWithGoogle();
-    if (result?.error) {
-      setError(result.error.message);
+    setIsGoogleLoading(true);
+    const { error } = await signInWithGoogle("/");
+    if (error) {
+      setIsGoogleLoading(false);
+      setError(friendlyAuthError(error.message));
     }
   };
+
 
   if (isLoading || user) {
     return (
@@ -142,10 +156,12 @@ function SignupPage() {
           type="button"
           variant="outline"
           onClick={handleGoogle}
+          disabled={isGoogleLoading}
           className="mt-6 w-full rounded-full border-border py-5 text-base"
         >
-          Continue with Google
+          {isGoogleLoading ? "Redirecting to Google…" : "Continue with Google"}
         </Button>
+
 
         <p className="mt-8 text-center text-sm text-muted-foreground">
           Already have an account?{" "}
