@@ -31,6 +31,15 @@ function SignupPage() {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  useEffect(() => {
+    const urlError = readAuthErrorFromUrl();
+    if (urlError) {
+      setError(urlError);
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading && user) {
@@ -46,7 +55,7 @@ function SignupPage() {
     const { error } = await signUp(email, password);
     setIsSubmitting(false);
     if (error) {
-      setError(error.message);
+      setError(friendlyAuthError(error.message));
     } else {
       setMessage("Check your email for a confirmation link.");
     }
@@ -54,11 +63,14 @@ function SignupPage() {
 
   const handleGoogle = async () => {
     setError(null);
-    const result = await signInWithGoogle();
-    if (result?.error) {
-      setError(result.error.message);
+    setIsGoogleLoading(true);
+    const { error } = await signInWithGoogle("/");
+    if (error) {
+      setIsGoogleLoading(false);
+      setError(friendlyAuthError(error.message));
     }
   };
+
 
   if (isLoading || user) {
     return (
